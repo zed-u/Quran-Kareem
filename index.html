@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>القرآن الكريم - صدقة جارية</title>
+    <style>
+        body {
+            font-family: 'Amiri', 'Traditional Arabic', serif;
+            line-height: 2;
+            background-color: #f5f5f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #2c5e1a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .surah-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .surah-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+        .surah-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background-color: #f0f7e6;
+        }
+        .surah-name {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #2c5e1a;
+        }
+        .surah-details {
+            font-size: 14px;
+            color: #666;
+        }
+        .surah-content {
+            display: none;
+            margin-top: 30px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            line-height: 2.5;
+            font-size: 20px;
+            text-align: justify;
+        }
+        .active {
+            display: block;
+        }
+        .back-btn {
+            background-color: #2c5e1a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .back-btn:hover {
+            background-color: #1e3d12;
+        }
+        .dedication {
+            background-color: #e6f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-right: 5px solid #2c5e1a;
+        }
+        .dua-section {
+            background-color: #fff8e6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-right: 5px solid #e6a700;
+        }
+        h1, h2, h3 {
+            color: #2c5e1a;
+        }
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .cool-btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #fff8e6;
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            border-radius: 4px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin-right: 10px;
+        }
+        
+        .cool-btn:hover {
+            background-color: #e6f3ff;
+        }
+        
+        .cool-btn:active {
+            transform: translateY(1px);
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        @media (max-width: 768px) {
+            .surah-list {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <h1>القرآن الكريم</h1>
+        <p>هذا الموقع صدقة جارية عن أرواح أحبائنا</p>
+    </div>
+
+    <div class="container">
+        <div class="dedication">
+            <h2>صدقة جارية</h2>
+            <p>هذا العمل خالصًا لوجه الله تعالى وصدقة جارية عن روح:</p>
+            <ul>
+                <li>روان ناصر أحمد السيد</li>
+                <li>سارة حسن محمد عبد الرحمن العدل</li>
+                
+            </ul>
+            <p>اللهم اجعل هذا القرآن الكريم شفيعًا لهم، ونورًا في قبورهم، ورفعة في درجاتهم.</p>
+        </div>
+
+        <div class="dua-section">
+            <h2>الدعاء لهم</h2>
+            <p>اللهم اغفر لهم وارحمهم، وعافهم واعف عنهم، وأكرم نزلهم، ووسع مدخلهم، واغسلهم بالماء والثلج والبرد، ونقهم من الذنوب والخطايا كما ينقى الثوب الأبيض من الدنس.</p>
+            <p>اللهم اجعل القرآن الكريم ربيع قلوبهم، ونورًا لأبصارهم، وجلاءً لأحزانهم، وذهابًا لهمومهم وغمتهم.</p>
+            <p>اللهم أدخلهم الجنة بغير حساب ولا سابقة عذاب، وارزقهم الفردوس الأعلى مع النبيين والصديقين والشهداء وحسن أولئك رفيقًا.</p>
+            <p>اللهم اجعل قبورهم روضة من رياض الجنة، ولا تجعلها حفرة من حفر النار.</p>
+        </div>
+        <div class="dua-section">
+            <ul class=nav-menu>
+                <a href="https://zed-u.github.io/Quran-Kareem2/" class="cool-btn">القرآن الكريم MP3 </a>
+                <a href="https://zed-u.github.io/Quran-Kareem1/" class=cool-btn>القرآن الكريم</a>
+            </ul>
+        
+
+        </div>
+    </script>
+</body>
+</html>
+                                                                        الحقوق محفوظة لموقع Quran Kareem &copy;2025 - <script>document.write(new Date().getFullYear());</script> <a href="https://zed-u.github.io/Quran-Kareem/" target="_blank">Quran-Kareem</a>  
