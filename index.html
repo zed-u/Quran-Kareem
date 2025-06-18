@@ -5,177 +5,584 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>القرآن الكريم - صدقة جارية</title>
     <style>
-        body {
-            font-family: 'Amiri', 'Traditional Arabic', serif;
-            line-height: 2;
-            background-color: #f5f5f0;
-            color: #333;
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap');
+        
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        .header {
-            background-color: #2c5e1a;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        
+        :root {
+            --primary-gold: #D4AF37;
+            --primary-green: #2ECC71;
+            --dark-bg: #0a0a0f;
+            --darker-bg: #050508;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #b8bcc8;
+            --accent-blue: #3498db;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
+        
+        body {
+            font-family: 'Noto Sans Arabic', Arial, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.8;
         }
-        .surah-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 30px;
-        }
-        .surah-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            cursor: pointer;
-            border: 1px solid #ddd;
-        }
-        .surah-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            background-color: #f0f7e6;
-        }
-        .surah-name {
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 5px;
-            color: #2c5e1a;
-        }
-        .surah-details {
-            font-size: 14px;
-            color: #666;
-        }
-        .surah-content {
-            display: none;
-            margin-top: 30px;
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            line-height: 2.5;
-            font-size: 20px;
-            text-align: justify;
-        }
-        .active {
-            display: block;
-        }
-        .back-btn {
-            background-color: #2c5e1a;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-        .back-btn:hover {
-            background-color: #1e3d12;
-        }
-        .dedication {
-            background-color: #e6f3ff;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 30px 0;
-            border-right: 5px solid #2c5e1a;
-        }
-        .dua-section {
-            background-color: #fff8e6;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 30px 0;
-            border-right: 5px solid #e6a700;
-        }
-        h1, h2, h3 {
-            color: #2c5e1a;
-        }
-        .search-box {
+        
+        /* Background Animation */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            margin: 20px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .cool-btn {
-            display: inline-block;
-            padding: 6px 12px;
-            background-color: #fff8e6;
-            color: rgb(0, 0, 0);
-            text-decoration: none;
-            border-radius: 4px;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            margin-right: 10px;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #0a0a0f, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
         }
         
-        .cool-btn:hover {
-            background-color: #e6f3ff;
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
-        .cool-btn:active {
-            transform: translateY(1px);
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
         }
-        .btn-container {
+        
+        /* Header */
+        
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
-            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
         }
-        @media (max-width: 768px) {
-            .surah-list {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        
+        .logo {
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-gold), #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.8)); }
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-item a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+        
+        .nav-item a:hover {
+            color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 4rem 2rem;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-title {
+            font-family: 'Amiri', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, var(--primary-gold), #ffffff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShimmer 3s ease-in-out infinite;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+        
+        @keyframes textShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
+        
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-gold), #FFD700);
+            color: var(--darker-bg);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5);
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .stat-card:hover::before {
+            left: 100%;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+            font-family: 'Amiri', serif;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 6rem 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Amiri', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-gold), #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        
+        
+        /* Footer */
+        
+        
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .copyright {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+            color: #ffffff;
+            font-size: 14px;
+            line-height: 1.4;
+            text-align: center;
+        }
+  .copyright strong {
+            color: #ffffff;
+            font-weight: bold;
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header">
-        <h1>القرآن الكريم</h1>
-        <p>هذا الموقع صدقة جارية عن أرواح أحبائنا</p>
-    </div>
-
-    <div class="container">
-        <div class="dedication">
-            <h2>صدقة جارية</h2>
-            <p>هذا العمل خالصًا لوجه الله تعالى وصدقة جارية عن روح:</p>
-            <ul>
-                <li>روان ناصر أحمد السيد</li>
-                <li>سارة حسن محمد عبد الرحمن العدل</li>
-                
-            </ul>
-            <p>اللهم اجعل هذا القرآن الكريم شفيعًا لهم، ونورًا في قبورهم، ورفعة في درجاتهم.</p>
+    <!-- Background Animation -->
+    <div class="background-animation"></div>
+    <div id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">القرآن الكريم</div>
         </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">القرآن الكريم - صدقة جارية</h1>
+            <p class="hero-subtitle">
+                <p>هذا العمل خالصًا لوجه الله تعالى وصدقة جارية عن روح:</p>
 
-        <div class="dua-section">
-            <h2>الدعاء لهم</h2>
+                <p>روان ناصر أحمد السيد</p>
+                <p>سارة حسن محمد عبد الرحمن العدل</p>
+            <p>اللهم اجعل هذا القرآن الكريم شفيعًا لهم، ونورًا في قبورهم، ورفعة في درجاتهم.</p>
+            </p>
+            <p class="hero-description">
+                <h1>الدعاء لهم</h1>
             <p>اللهم اغفر لهم وارحمهم، وعافهم واعف عنهم، وأكرم نزلهم، ووسع مدخلهم، واغسلهم بالماء والثلج والبرد، ونقهم من الذنوب والخطايا كما ينقى الثوب الأبيض من الدنس.</p>
             <p>اللهم اجعل القرآن الكريم ربيع قلوبهم، ونورًا لأبصارهم، وجلاءً لأحزانهم، وذهابًا لهمومهم وغمتهم.</p>
             <p>اللهم أدخلهم الجنة بغير حساب ولا سابقة عذاب، وارزقهم الفردوس الأعلى مع النبيين والصديقين والشهداء وحسن أولئك رفيقًا.</p>
             <p>اللهم اجعل قبورهم روضة من رياض الجنة، ولا تجعلها حفرة من حفر النار.</p>
+            </p>
+            <div class="action-buttons">
+                <a href="https://zed-u.github.io/Quran-Kareem2/" class="btn btn-primary">
+                    🎧 استمع للتلاوة
+                </a>
+            </div>
         </div>
-        <div class="dua-section">
-            <ul class=nav-menu>
-                <a href="https://zed-u.github.io/Quran-Kareem2/" class="cool-btn">القرآن الكريم MP3 </a>
-                <a href="https://zed-u.github.io/Quran-Kareem1/" class=cool-btn>القرآن الكريم</a>
-            </ul>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card fade-in">
+                    <div class="stat-number">114</div>
+                    <div class="stat-label">سورة</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">6236</div>
+                    <div class="stat-label">آية</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">30</div>
+                    <div class="stat-label">جزء</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">96+</div>
+                    <div class="stat-label">قارئ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    <!-- Footer -->
+  <footer>
+            <div class="copyright">
+            <p>جميع الحقوق محفوظة لموقع</p>
+            <p><strong><a href="https://zed-u.github.io/Quran-Kareem/" target="_blank">Quran-Kareem</a></strong></p>
+        </div>
+    </div>
+    </footer>
+    
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
         
-
-        </div>
+        // Scroll animations
+        function observeElements() {
+            const elements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+            
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+        
+        // Smooth scrolling for navigation links
+        function initSmoothScrolling() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Counter animation for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent.replace(/\D/g, ''));
+                let current = 0;
+                const increment = target / 100;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = counter.textContent.includes('+') ? target + '+' : target;
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 20);
+            });
+        }
+        
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            observeElements();
+            initSmoothScrolling();
+            
+            // Animate counters when they come into view
+            const statsSection = document.querySelector('.stats-section');
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            });
+            statsObserver.observe(statsSection);
+        });
+        
+         document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const particles = [];
+    const particleCount = 100;
+    
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.zIndex = '-1';
+    canvas.style.pointerEvents = 'none';
+    document.body.appendChild(canvas);
+    
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    
+    // إنشاء الجزيئات
+    function createParticles() {
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 3 + 2,
+          speedX: Math.random() * 2 - 1,
+          speedY: Math.random() * 2 - 1
+        });
+      }
+    }
+    
+    // رسم الجزيئات
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(255, 215, 0, 0.3)';
+      
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // تحريك الجزيئات
+        p.x += p.speedX;
+        p.y += p.speedY;
+        
+        // إبقاء الجزيئات داخل الشاشة
+        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+      }
+      
+      requestAnimationFrame(drawParticles);
+    }
+    
+    createParticles();
+    drawParticles();
+  });
     </script>
 </body>
 </html>
-                                                                        الحقوق محفوظة لموقع Quran Kareem &copy;2025 - <script>document.write(new Date().getFullYear());</script> <a href="https://zed-u.github.io/Quran-Kareem/" target="_blank">Quran-Kareem</a>  
