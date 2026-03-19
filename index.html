@@ -357,6 +357,106 @@
             color: #ffffff;
             font-weight: bold;
         }
+
+
+        .custom-alert {
+            position: fixed;
+            top: 5%; 
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            /* لون النص الأساسي ذهبي */
+            color: #ffd700; 
+            width: 90%; 
+            max-width: 600px; 
+            border-radius: 20px;
+            overflow: hidden;
+            z-index: 99999;
+            box-shadow: 0px 15px 40px rgba(0,0,0,0.7);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* إطار ذهبي خفيف */
+            border: 1px solid rgba(255, 215, 0, 0.3); 
+        }
+
+        @media (min-width: 1200px) {
+            .custom-alert { max-width: 850px; }
+            .alert-content { font-size: 2.2rem !important; padding: 50px !important; }
+        }
+
+        /* 2. محتوى النص */
+        .alert-content {
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            /* ظل نص لزيادة الوضوح */
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            /* تطبيق تأثير الوميض الهادئ */
+            animation: soft_glow 2s ease-in-out infinite alternate; 
+        }
+
+        /* 3. التروس */
+        .gears-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.1;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .gear {
+            position: absolute;
+            display: inline-block;
+            animation: rotate_gear 5s linear infinite;
+            /* التروس ذهبية */
+            color: #ffd700; 
+        }
+
+        .g1 { top: -10px; right: -10px; font-size: 60px; }
+        .g2 { bottom: -10px; left: -10px; font-size: 50px; animation-duration: 3s; }
+        .g3 { top: 20%; left: 5%; font-size: 30px; animation-direction: reverse; }
+        .g4 { bottom: 20%; right: 5%; font-size: 35px; animation-duration: 7s; }
+
+        @keyframes rotate_gear {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 4. شريط الوقت */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        .progress-fill {
+            height: 100%;
+            /* شريط تقدم ذهبي متدرج */
+            background: linear-gradient(90deg, #ffd700, #b8860b);
+            width: 100%;
+            animation: shrink 6s linear forwards;
+        }
+
+        @keyframes shrink {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+
+        /* 5. تعريف تأثير الوميض الهادئ (Glow) */
+        @keyframes soft_glow {
+            from {
+                text-shadow: 0 0 5px rgba(255, 215, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.3);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+            }
+        }
+    
     </style>
 </head>
 <body>
@@ -434,9 +534,28 @@
         </div>
     </div>
     </footer>
+
+    <div id="auto-alert" class="custom-alert">
+        <div class="gears-container">
+            <span class="gear g1">🛠️</span>
+            <span class="gear g2">🛠️</span>
+            <span class="gear g3">⚙️</span>
+            <span class="gear g4">⚙️</span>
+        </div>
+
+        <div class="alert-content">
+            سيتم تحديث الموقع قريبًا
+            <br>
+            <span style="font-size: 0.85em; color: rgba(255, 215, 0, 0.8);">Coming Soon</span>
+        </div>
+
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-fill"></div>
+        </div>
+    </div>
     
     <script>
-            alert("سيتم تحديث الموقع قريبًا");
+        
 
         // Create floating particles
         function createParticles() {
@@ -588,6 +707,21 @@
     createParticles();
     drawParticles();
   });
+
+
+         window.onload = function() {
+            var alertBox = document.getElementById('auto-alert');
+            
+            setTimeout(function() {
+                alertBox.style.transition = "all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55)";
+                alertBox.style.opacity = "0";
+                alertBox.style.transform = "translate(-50%, -40px) scale(0.9)";
+                
+                setTimeout(function() {
+                    alertBox.remove(); 
+                }, 800);
+            }, 6000); 
+        };
     </script>
 </body>
 </html>
